@@ -7,6 +7,7 @@ function App() {
   const [longitude, setLongitude] = useState();
   const [userAddress, setUserAddress] = useState();
   const [customerAddress, setCustomerAddress] = useState();
+  const [customerName, setCustomerName] = useState();
   const geo = navigator.geolocation;
 
   useEffect(() => {
@@ -87,10 +88,10 @@ function App() {
 
   const findNearestCustomer = () => {
     const customers = [
-      { name: "Customer1", clatitude: 22.5201824, clongitude: 72.9166421 },
-      { name: "Customer2", clatitude: 22.5202663, clongitude: 72.9165708 },
-      { name: "Customer3", clatitude: 22.521073, clongitude: 72.9169385 },
-      { name: "Customer4", clatitude: 22.5206178, clongitude: 72.9167153 },
+      { name: "Hemant", clatitude: 22.5201824, clongitude: 72.9166421 },
+      { name: "Darshit", clatitude: 22.5202663, clongitude: 72.9165708 },
+      { name: "Adarsh", clatitude: 22.521073, clongitude: 72.9169385 },
+      { name: "Jay", clatitude: 22.5206178, clongitude: 72.9167153 },
     ];
 
     let nearestCustomer = null;
@@ -105,6 +106,7 @@ function App() {
       }
     });
     getCustomerAddress(customers[nearestCustomerIndex].clatitude,customers[nearestCustomerIndex].clongitude);
+    setCustomerName(customers[nearestCustomerIndex].name);
     setDistance(minDistance);
     return nearestCustomer;
   };
@@ -129,6 +131,7 @@ function App() {
         <h3>Longitude: {longitude}</h3>
         <h3>User Address: {userAddress}</h3>
         <h3>Customer Address: {customerAddress}</h3>
+        <h3>Customer Name: {customerName}</h3>
         {distance !== null && (
           <p>
             The distance between You and the nearest customer is: ( {distance.toFixed(2)} ) kilometers
